@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Rana - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Background image for the whole page */
+            background-image: url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #2c3e50; /* Dark Slate Gray */
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Dark overlay for body background readability */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* Adjusted overlay darkness */
+            z-index: -1;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Ensure main content is above the overlay */
+        main.container { /* Applied container class directly to main */
+            position: relative;
+            z-index: 1;
+            max-width: 1024px; /* Adjust this value (e.g., 960px, 1024px, 1100px) */
+            padding-left: 1rem;
+            padding-right: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        /* Sticky Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        header.scrolled {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        header .container {
+            max-width: 1024px; /* Match main container's max-width */
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Header Title */
+        header h1 {
+            color: #1f2937; /* Dark Gray */
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            transition: transform 0.2s ease;
+        }
+         header h1 a {
+             color: inherit;
+             text-decoration: none;
+         }
+        header h1:hover {
+            transform: scale(1.03);
+        }
+
+        /* Desktop Navigation Links */
+        header nav a {
+            color: #3182ce; /* Blue */
+            font-weight: 600;
+            padding: 0.5rem 0.25rem;
+            margin: 0 0.25rem;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+            text-shadow: none;
+        }
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2b6cb0; /* Darker Blue */
+            transition: width 0.3s ease;
+        }
+        header nav a:hover {
+            color: #2b6cb0; /* Darker Blue */
+            transform: translateY(-2px);
+        }
+        header nav a:hover::after,
+        header nav a.active::after {
+            width: 100%;
+        }
+        header nav a.active {
+            color: #2b6cb0; /* Darker Blue */
+            font-weight: 700;
+        }
+
+
+        /* Mobile Menu */
+        #mobile-menu {
+            background-color: rgba(44, 62, 80, 0.97); /* Dark Slate Gray base */
+            backdrop-filter: blur(5px);
+        }
+        #mobile-menu-content {
+             background-color: #2c3e50; /* Dark Slate Gray */
+             box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+        #mobile-menu nav a {
+            color: #ecf0f1; /* Light Gray */
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            display: block;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #3e5062; /* Slightly Lighter Slate */
+            border-radius: 4px;
+        }
+        #mobile-menu nav a:hover {
+            color: #ffffff;
+            background-color: #3e5062; /* Slightly Lighter Slate */
+            transform: translateX(5px);
+        }
+         #mobile-menu nav a.active {
+             color: #38bdf8; /* Sky Blue */
+             background-color: rgba(56, 189, 248, 0.1);
+             font-weight: 700;
+             border-left: 3px solid #38bdf8; /* Sky Blue */
+             padding-left: calc(1rem - 3px);
+         }
+
+
+        /* Section Styling */
+        .section-design {
+            background-color: rgba(255, 255, 255, 0.93);
+            /* Subtle grid pattern background */
+            background-image:
+                linear-gradient(rgba(209, 213, 219, 0.3) 1px, transparent 1px),
+                linear-gradient(to right, rgba(209, 213, 219, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: center center;
+            backdrop-filter: blur(3px);
+            border-radius: 1rem;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(226, 232, 240, 0.4); /* Subtle border */
+
+            /* Hazy border effect using inset box-shadows */
+            box-shadow:
+                inset 0 0 15px 5px rgba(255, 204, 0, 0.3), /* Gold */
+                inset 0 0 15px 5px rgba(0, 204, 255, 0.3), /* Cyan */
+                inset 0 0 15px 5px rgba(204, 0, 255, 0.3), /* Magenta */
+                inset 0 0 15px 5px rgba(51, 204, 51, 0.3), /* Lime */
+                0 12px 25px rgba(44, 62, 80, 0.15); /* Outer shadow */
+
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .section-design {
+                padding: 3.5rem;
+                margin-bottom: 4rem;
+            }
+        }
+        .section-design:hover {
+            transform: translateY(-8px) scale(1.01);
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow:
+                inset 0 0 20px 8px rgba(255, 204, 0, 0.4), /* Gold */
+                inset 0 0 20px 8px rgba(0, 204, 255, 0.4), /* Cyan */
+                inset 0 0 20px 8px rgba(204, 0, 255, 0.4), /* Magenta */
+                inset 0 0 20px 8px rgba(51, 204, 51, 0.4), /* Lime */
+                0 18px 35px rgba(44, 62, 80, 0.2); /* Outer shadow */
+        }
+
+         /* Exception: Keep overflow visible for education timeline dots */
+         #education {
+             overflow: visible;
+             /* Reset box-shadow if needed */
+             /* box-shadow: 0 12px 25px rgba(44, 62, 80, 0.15); */
+         }
+         /* #education:hover {
+             box-shadow: 0 18px 35px rgba(44, 62, 80, 0.2);
+         } */
+
+
+        /* Section Title */
+        .section-title-design {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            /* CHANGED: Using a different gradient */
+            background: linear-gradient(to right, #1a202c, #2d3748); /* Dark Gray to Slate */
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: fadeInTitle 1s ease-in-out;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+         .section-title-design::after {
+             content: '';
+             position: absolute;
+             bottom: 0;
+             left: 50%;
+             transform: translateX(-50%);
+             width: 60px;
+             height: 3px;
+             background: linear-gradient(to right, #1a202c, #2d3748); /* Match title gradient */
+             border-radius: 2px;
+         }
+
+         @media (min-width: 768px) {
+                .section-title-design {
+                    font-size: 3rem;
+                    margin-bottom: 4rem;
+                }
+                .section-title-design::after {
+                    width: 80px;
+                    height: 4px;
+                }
+         }
+
+        @keyframes fadeInTitle {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Heading (Sub-headings within sections) */
+        .section-heading {
+            /* CHANGED: New gradient and border color */
+            background: linear-gradient(to right, #2c5282, #2b6cb0); /* Dark Blue to Blue */
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 3px solid #2c5282; /* Dark Blue border */
+            display: inline-block;
+            transition: border-color 0.3s ease-in-out;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+         @media (min-width: 768px) {
+                .section-heading {
+                    font-size: 1.75rem;
+                }
+         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-heading:hover {
+            border-color: #2b6cb0; /* Lighter Blue border on hover */
+        }
+
+         /* About Me Section */
+         .about-content-grid {
+             display: grid;
+             grid-template-columns: 1fr;
+             gap: 2rem;
+             align-items: center;
+         }
+         @media (min-width: 768px) {
+             .about-content-grid {
+                 grid-template-columns: 3fr 2fr;
+                 gap: 3rem;
+             }
+         }
+         .about-text {
+             color: #4a5568; /* Medium Gray */
+             font-size: 1rem;
+             line-height: 1.8;
+             text-align: left;
+         }
+          @media (min-width: 768px) {
+               .about-text {
+                   font-size: 1.05rem;
+               }
+           }
+         .about-text p {
+             margin-bottom: 1.25rem;
+         }
+          .about-text strong {
+               font-weight: 600;
+               color: #2c5282; /* Dark Blue for emphasis */
+           }
+         .about-image-container {
+             position: relative;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+         }
+         .about-image {
+             border-radius: 0.75rem;
+             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+             width: 100%;
+             max-width: 320px;
+             height: auto; /* Maintain aspect ratio */
+             object-fit: cover; /* Ensure image covers the area well */
+             border: 5px solid white;
+             transition: transform 0.4s ease, box-shadow 0.4s ease;
+         }
+         .about-image:hover {
+             transform: scale(1.05) rotate(1deg);
+             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+         }
+         .about-image-container::before {
+             content: '';
+             position: absolute;
+             width: 90%;
+             height: 90%;
+             background: linear-gradient(45deg, rgba(56, 178, 172, 0.1), rgba(49, 130, 206, 0.1)); /* Teal-Blue gradient */
+             border-radius: 1rem;
+             z-index: -1;
+             transform: rotate(-5deg);
+             filter: blur(15px);
+             opacity: 0.7;
+         }
+
+
+        /* Project Card */
+         .project-card {
+             background-color: #ffffff;
+             border-radius: 0.75rem;
+             padding: 1.75rem;
+             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             border: 1px solid #e5e7eb;
+             display: flex;
+             flex-direction: column;
+             height: 100%;
+         }
+         .project-card:hover {
+             transform: translateY(-6px) scale(1.02);
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+         }
+         /* Style for project image (Reverted) */
+         /* .project-image { ... } */
+         .project-image {
+             width: 100%; /* Make image fill the card width */
+             height: 200px; /* Set a fixed height or use aspect ratio classes */
+             object-fit: cover; /* Cover the area without distorting aspect ratio */
+             border-radius: 0.5rem; /* Match card border radius */
+             margin-bottom: 1rem; /* Space below the image */
+             border: 1px solid #e5e7eb; /* Subtle border */
+         }
+
+
+        .project-heading {
+            /* CHANGED: Project heading gradient */
+            background: linear-gradient(to right, #319795, #3182ce); /* Teal to Blue */
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: none;
+            border-bottom: none;
+            padding-bottom: 0;
+            display: inline;
+        }
+        .project-heading:hover {
+            /* filter: brightness(1.1); */
+        }
+         .project-description {
+             color: #4a5568; /* Medium Gray */
+             margin-bottom: 1.25rem;
+             flex-grow: 1;
+         }
+        .project-link-button {
+            /* CHANGED: Link color */
+            color: #319795; /* Teal */
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+        }
+         .project-link-button:hover {
+             color: #2c7a7b; /* Darker Teal */
+             text-decoration: underline;
+             transform: translateX(2px);
+         }
+         .project-link-button svg {
+             transition: transform 0.3s ease;
+             margin-left: 0.25rem;
+         }
+
+
+        /* General Button Style */
+        .button-primary {
+            /* CHANGED: Button gradient */
+            background: linear-gradient(to right, #319795, #3182ce); /* Teal to Blue */
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, background-size 0.4s ease;
+            box-shadow: 0 5px 12px rgba(49, 151, 149, 0.3); /* Teal shadow */
+            display: inline-block;
+            text-align: center;
+            border: none;
+            background-size: 100% 100%;
+        }
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(49, 151, 149, 0.4); /* Darker Teal shadow */
+            background-size: 110% 110%;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        @media (min-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c7a7b; /* Dark Teal */
+            margin-bottom: 1.75rem;
+            position: relative;
+            padding-left: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+         .category-title::before {
+             content: '';
+             display: inline-block;
+             width: 0.75rem;
+             height: 0.75rem;
+             background-color: #38b2ac; /* Teal */
+             border-radius: 50%;
+             margin-right: 0.75rem;
+             position: absolute;
+             left: 0;
+             top: 50%;
+             transform: translateY(-50%);
+         }
+
+        /* Styles for ALL skill items (including programming languages now) */
+        .skill-item { margin-bottom: 1.5rem; }
+        .skill-bar {
+            background-color: #e5e7eb;
+            height: 0.75rem;
+            border-radius: 0.375rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            border-radius: 0.375rem;
+            width: 0;
+            /* Gradient set inline for variety */
+            transition: width 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            position: relative;
+        }
+        .skill-name-level {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #374151; /* Medium Gray */
+        }
+        .skill-name {
+            font-weight: 500;
+            color: #1f2937; /* Dark Gray */
+        }
+        .skill-percentage {
+            font-weight: 600;
+            /* Color set inline for variety */
+        }
+
+
+         .professional-skills-container span {
+             background-color: #e6fffa; /* Light Teal */
+             color: #2c7a7b; /* Dark Teal */
+             padding: 0.3rem 0.8rem;
+             border-radius: 9999px;
+             font-size: 0.85rem;
+             font-weight: 500;
+             transition: background-color 0.3s ease, color 0.3s ease;
+             cursor: default;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+         }
+          .professional-skills-container span:hover {
+               background-color: #b2f5ea; /* Lighter Teal */
+           }
+
+
+        /* Education Section */
+        .education-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .timeline-line {
+            position: absolute;
+            left: calc(1.5rem - 2px);
+            top: 1.5rem;
+            bottom: 1.5rem;
+            width: 4px;
+            background: linear-gradient(to bottom, #38b2ac, #3182ce); /* Teal to Blue */
+            border-radius: 2px;
+            margin-left: 0;
+        }
+        .education-item {
+            margin-bottom: 3rem;
+            padding-left: 3.5rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .education-item:hover {
+             transform: translateX(5px);
+        }
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, #38b2ac, #3182ce); /* Teal to Blue */
+            border: 3px solid #f0f4f8; /* Light Gray-Blue */
+            box-shadow: 0 3px 10px rgba(49, 130, 206, 0.4); /* Blue shadow */
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+             transition: transform 0.3s ease;
+        }
+         .education-item:hover .timeline-dot {
+             transform: scale(1.1);
+         }
+
+        .education-card {
+            background-color: #f7fafc; /* Very Light Gray-Blue */
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0; /* Light Gray */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+             overflow: hidden;
+        }
+        .education-card:hover {
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        .education-degree {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a202c; /* Darkest Gray */
+            margin-bottom: 0.5rem;
+        }
+        .education-field {
+            font-size: 1.05rem;
+            color: #2b6cb0; /* Darker Blue */
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .education-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #4a5568; /* Medium Gray */
+        }
+        .education-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .education-detail svg {
+            width: 1rem;
+            height: 1rem;
+            color: #319795; /* Teal */
+            flex-shrink: 0;
+        }
+        .education-description {
+            font-size: 1rem;
+            color: #2d3748; /* Slate Gray */
+            line-height: 1.6;
+        }
+
+        /* Certificates Section */
+         #certificates .section-heading {
+             /* Keep original violet gradient for certificates */
+             background: linear-gradient(to right, #6366f1, #a855f7);
+             -webkit-background-clip: text;
+             color: transparent;
+             font-size: 1.1rem !important;
+             margin-bottom: 0.75rem !important;
+             border-bottom: 3px solid #a855f7 !important;
+             padding-bottom: 0.4rem !important;
+             display: inline-block;
+         }
+          @media (min-width: 768px) {
+                #certificates .section-heading {
+                    font-size: 1.25rem !important;
+                }
+           }
+         #certificates .section-heading:hover {
+             border-color: #6366f1 !important;
+         }
+
+         .certificate-card {
+             background-color: #fff;
+             border-radius: 0.75rem;
+             padding: 1.5rem;
+             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             border: 1px solid #e5e7eb;
+             height: 100%;
+             display: flex;
+             flex-direction: column;
+         }
+         .certificate-card:hover {
+             transform: translateY(-6px) scale(1.02);
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+         }
+          .certificate-card p {
+              color: #4a5568; /* Medium Gray */
+              flex-grow: 1;
+              margin-bottom: 1rem;
+          }
+          /* CHANGED: Use button style for certificate links */
+          .certificate-link-button {
+              color: #4c51bf; /* Indigo */
+              font-weight: 500;
+              transition: color 0.3s ease, transform 0.3s ease;
+              margin-top: auto;
+              display: inline-flex;
+              align-items: center;
+              font-size: 0.9rem;
+              cursor: pointer; /* Add cursor pointer */
+              background: none; /* Remove default button styles */
+              border: none;
+              padding: 0;
+          }
+           .certificate-link-button:hover {
+               color: #667eea; /* Lighter Indigo */
+               text-decoration: underline;
+               transform: translateX(2px);
+           }
+           .certificate-link-button svg {
+               margin-left: 0.25rem;
+           }
+
+
+        /* Contact Form Styles */
+         #contact .contact-container {
+             background-color: #ffffff;
+             border-radius: 0.75rem;
+             padding: 2rem;
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+             border: 1px solid #e5e7eb;
+         }
+          @media (min-width: 768px) {
+                #contact .contact-container {
+                    padding: 2.5rem;
+                }
+           }
+        #contact label {
+            font-weight: 600;
+            color: #2d3748; /* Slate Gray */
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            border: 1px solid #d1d5db; /* Cool Gray */
+            border-radius: 0.5rem;
+            padding: 0.7rem 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.95rem;
+            color: #2d3748;
+        }
+        #contact input[type="text"]:focus,
+        #contact input[type="email"]:focus,
+        #contact textarea:focus {
+            border-color: #319795; /* Teal */
+            box-shadow: 0 0 0 3px rgba(49, 151, 149, 0.2); /* Teal shadow */
+            outline: none;
+        }
+        #contact textarea {
+            min-height: 120px;
+        }
+        #contact button[type="submit"] {
+             width: 100%;
+             /* Uses .button-primary styles (Teal to Blue gradient) */
+        }
+         @media (min-width: 768px) {
+              #contact button[type="submit"] {
+                  width: auto;
+              }
+         }
+         #contact .contact-info a {
+              transition: color 0.3s ease;
+              color: #3182ce; /* Blue */
+          }
+           #contact .contact-info a:hover {
+               color: #2b6cb0; /* Darker Blue */
+           }
+           #form-status {
+               min-height: 1.25rem;
+               font-weight: 500;
+           }
+
+
+        /* Footer */
+        footer {
+            background-color: rgba(229, 231, 235, 0.9); /* Light Gray */
+            backdrop-filter: blur(5px);
+            padding: 1.5rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(209, 213, 219, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Achievement List Styling */
+        .achievement-list li {
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+        .achievement-list .achievement-icon {
+             width: 1.5rem;
+             height: 1.5rem;
+             flex-shrink: 0;
+             margin-right: 0.75rem;
+             margin-top: 0.125rem;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border-radius: 9999px;
+             /* Icon color set by parent span */
+        }
+         .achievement-list .achievement-icon svg {
+              width: 0.875rem;
+              height: 0.875rem;
+          }
+         .achievement-list .achievement-text {
+             color: #2d3748; /* Slate Gray */
+         }
+          .achievement-list .achievement-text strong {
+               font-weight: 600;
+               /* Color set by parent span */
+           }
+           .achievement-list .internship-details {
+               font-size: 0.9rem;
+               color: #718096; /* Lighter Gray */
+               margin-top: 0.25rem;
+           }
+           .achievement-list .internship-summary {
+               font-size: 0.95rem;
+               color: #4a5568; /* Medium Gray */
+               margin-top: 0.5rem;
+               padding-left: 2.25rem; /* Indent summary points */
+           }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 110;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 600px; /* Default width */
+            max-height: 85vh; /* Increased max height */
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active .modal-content {
+             transform: scale(1);
+        }
+        .modal-close-button {
+             position: absolute;
+             top: 0.75rem;
+             right: 0.75rem;
+             background: none;
+             border: none;
+             color: #718096; /* Lighter Gray */
+             font-size: 1.5rem;
+             cursor: pointer;
+             padding: 0.25rem;
+             line-height: 1;
+             transition: color 0.2s ease;
+        }
+         .modal-close-button:hover {
+             color: #1a202c; /* Darkest Gray */
+         }
+         .modal-title {
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: #2c5282; /* Dark Blue */
+             margin-bottom: 1.5rem;
+             padding-right: 2rem; /* Space for close button */
+         }
+         .modal-body p {
+             margin-bottom: 1rem;
+             color: #4a5568; /* Medium Gray */
+             line-height: 1.7;
+         }
+          .modal-body strong {
+               font-weight: 600;
+               color: #2d3748; /* Slate Gray */
+           }
+        /* Styles for certificate modal details */
+        .modal-body .certificate-detail {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .modal-body .certificate-detail strong {
+            display: block;
+            color: #2c5282; /* Dark Blue */
+            margin-bottom: 0.15rem;
+        }
+        .modal-body .certificate-verify-link {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .modal-body .certificate-verify-link a {
+            color: #319795; /* Teal */
+            text-decoration: underline;
+        }
+        .modal-body .certificate-verify-link a:hover {
+            color: #2c7a7b; /* Darker Teal */
+        }
+
+
+    </style>
+</head>
+<body class="bg-gray-50 font-inter">
+    <header id="main-header" class="py-3 md:py-4 fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-extrabold text-gray-800"> <a href="#">Shubham Rana</a>
+            </h1>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-1">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                    <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none p-2" aria-label="Toggle Navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40">
+        <div id="mobile-menu-content" class="w-72 h-full absolute right-0 p-6">
+            <div class="flex justify-end mb-6">
+                <button id="mobile-menu-close-button" class="text-white focus:outline-none p-1" aria-label="Close Menu">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                     </svg>
+                </button>
+            </div>
+            <nav class="block">
+                <ul class="space-y-2">
+                    <li><a href="#about" class="mobile-nav-link nav-link">About</a></li>
+                    <li><a href="#projects" class="mobile-nav-link nav-link">Projects</a></li>
+                    <li><a href="#achievements" class="mobile-nav-link nav-link">Achievements</a></li>
+                     <li><a href="#certificates" class="mobile-nav-link nav-link">Certificates</a></li>
+                    <li><a href="#skills" class="mobile-nav-link nav-link">Skills</a></li>
+                    <li><a href="#education" class="mobile-nav-link nav-link">Education</a></li>
+                    <li><a href="#contact" class="mobile-nav-link nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto py-8 pt-24 md:pt-28">
+
+        <section id="about" class="section-design">
+            <h2 class="section-title-design">About Me</h2>
+            <div class="about-content-grid">
+                <div class="about-text space-y-4">
+                    <p>
+                        Hello! I'm Shubham Rana, a passionate and driven Computer Science and Engineering student specializing in <strong>Artificial Intelligence & Machine Learning</strong> at Lovely Professional University.
+                    </p>
+                    <p>
+                        My goal is to leverage technology to create innovative solutions for real-world challenges. I have built a strong foundation in programming languages including <strong>Java and C++</strong>.
+                    </p>
+                    <p>
+                        I thrive on continuous learning and have gained hands-on experience in crucial areas such as <strong>Data Structures & Algorithms, Machine Learning concepts, OpenCV, TensorFlow, Keras, and NumPy</strong>. I'm always eager to explore new technologies and refine my skills.
+                    </p>
+                     <p>
+                         Beyond technical expertise, I value <strong>collaboration, adaptability, and clear communication</strong>, believing they are key to successful teamwork and project outcomes.
+                     <p>
+                         <div class="text-center mt-8 mb-8">
+    <a href="https://drive.google.com/file/d/1YwQ_bFISl3lCvqwylqR_kq5qF_dXTfeK/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="button-primary">
+        View CV
+    </a>
+</div>     
+                     </p>
+                </div>
+                <div class="about-image-container">
+                    <img src="shubbuuuu.jpg"
+                         alt="Shubham Rana Profile Picture"
+                         class="about-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x450/cccccc/ffffff?text=Image+Not+Found';">
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-design">
+             <h2 class="section-title-design">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="project-card">
+                    <img src="face-recognition-1024x630.jpg"
+                         alt="Project 1 Image Placeholder"
+                         class="project-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                    <h3 class="project-heading">Face Detection in Machine Learning</h3>
+                    <p class="project-description text-sm md:text-base">
+                        Developed a real-time face detection system utilizing Python, OpenCV for image processing, and TensorFlow/Keras for model implementation. Explored various detection algorithms and techniques.
+                    </p>
+                    <button type="button" class="project-link-button text-sm" data-modal-target="#modal-project1">
+                        Learn More
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+                <div class="project-card">
+                    <img src="Introduction-of-Online-Examination-System.png"
+                         alt="Project 2 Image Placeholder"
+                         class="project-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                     <h3 class="project-heading">Online Examination System</h3>
+                    <p class="project-description text-sm md:text-base">
+                        Created a secure and user-friendly web-based examination platform. Features included timed tests, multiple question types, and automatic result generation and analysis. (Tech stack: e.g., PHP, MySQL, HTML, CSS, JS)
+                    </p>
+                     <button type="button" class="project-link-button text-sm" data-modal-target="#modal-project2">
+                          Learn More
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                     </button>
+                </div>
+                 </div>
+        </section>
+
+        <section id="achievements" class="section-design">
+            <h2 class="section-title-design">Key Experience</h2>
+            <ul class="list-none space-y-4 pl-0 achievement-list">
+                 <li class="flex items-start">
+                     <span class="achievement-icon bg-teal-100 text-teal-700"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path d="M10.75 10.818v2.432a.75.75 0 01-1.5 0v-2.432a.75.75 0 111.5 0zM10 18a8 8 0 100-16 8 8 0 000 16zM3.81 9.41a.75.75 0 011.06-.22l1.752.877a.75.75 0 010 1.341l-1.752.877a.75.75 0 11-.84-1.578l1.11-.555-1.11-.555a.75.75 0 01-.22-1.06zM16.19 9.41a.75.75 0 01.22 1.06l-1.11.555 1.11.555a.75.75 0 11-.84 1.578l-1.752-.877a.75.75 0 010-1.341l1.752-.877a.75.75 0 011.06.22z"/></svg>
+                     </span>
+                     <div>
+                          <span class="achievement-text"><strong class="font-semibold text-teal-700">Summer Training Internship - GeeksforGeeks</strong></span>
+                          <p class="internship-details">June 2024 - August 2024</p>
+                          <ul class="list-disc pl-5 internship-summary space-y-1">
+                               <li>Developed and implemented communication strategies for various projects.</li>
+                               <li>Created promotional materials (brochures, flyers, catalogs).</li>
+                               <li>Analyzed consumer needs for market expansion and engagement.</li>
+                               <li>Collaborated with teams to enhance project management and planning.</li>
+                          </ul>
+                     </div>
+                 </li>
+                 </ul>
+        </section>
+
+        <section id="certificates" class="section-design">
+            <h2 class="section-title-design">Certificates</h2>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="certificate-card">
+                     <img src="Coursera C2SBMSTG5GQD_page-0001.jpg" alt="Algorithms on Strings Certificate Placeholder" class="w-full h-32 object-cover rounded-t-lg mb-4 border border-gray-200">
+                     <h3 class="section-heading">Algorithms on Strings (Coursera)</h3>
+                     <p class="text-sm text-gray-600">Completed an online non-credit course authorized by University of California San Diego.</p>
+                     <button type="button" class="certificate-link-button" data-modal-target="#modal-cert1">
+                          View Details
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                     </button>
+                </div>
+                <div class="certificate-card">
+                     <img src="certificate_page-0001.jpg" alt="Generative AI Certificate Placeholder" class="w-full h-32 object-cover rounded-t-lg mb-4 border border-gray-200">
+                     <h3 class="section-heading">Generative AI with Large Language Models (Coursera)</h3>
+                     <p class="text-sm text-gray-600">Completed an online non-credit course authorized by DeepLearning.AI and Amazon Web Services.</p>
+                     <button type="button" class="certificate-link-button" data-modal-target="#modal-cert2">
+                          View Details
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                     </button>
+                </div>
+                 </div>
+        </section>
+
+
+        <section id="skills" class="section-design">
+            <h2 class="section-title-design">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="category-title">Programming Languages</h3>
+                        <div class="skill-item" data-progress="85"> <div class="skill-name-level">
+                                <span class="skill-name">Java</span>
+                                <span class="skill-percentage" style="color: #2c5282;">85%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #4299e1, #2c5282);"></div></div> </div>
+                        <div class="skill-item" data-progress="80"> <div class="skill-name-level">
+                                <span class="skill-name">C++</span>
+                                <span class="skill-percentage" style="color: #285e61;">80%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #38b2ac, #285e61);"></div></div> </div>
+                        <div class="skill-item" data-progress="90"> <div class="skill-name-level">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percentage" style="color: #2c5282;">90%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #4299e1, #2c5282);"></div></div> </div>
+                        <div class="skill-item" data-progress="70"> <div class="skill-name-level">
+                                <span class="skill-name">C</span>
+                                <span class="skill-percentage" style="color: #285e61;">70%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #38b2ac, #285e61);"></div></div> </div>
+                    </div>
+
+                    <div class="skill-category">
+                         <h3 class="category-title">AI/ML & Data Science</h3>
+                         <div class="skill-item" data-progress="85">
+                            <div class="skill-name-level">
+                                 <span class="skill-name">Machine Learning Concepts</span>
+                                 <span class="skill-percentage" style="color: #2b6cb0;">85%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #3182ce, #2c5282);"></div></div> </div>
+                         <div class="skill-item" data-progress="80">
+                            <div class="skill-name-level">
+                                 <span class="skill-name">TensorFlow & Keras</span>
+                                 <span class="skill-percentage" style="color: #2c7a7b;">80%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #38b2ac, #2c7a7b);"></div></div> </div>
+                         <div class="skill-item" data-progress="75">
+                            <div class="skill-name-level">
+                                 <span class="skill-name">OpenCV</span>
+                                 <span class="skill-percentage" style="color: #2b6cb0;">75%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #3182ce, #2c5282);"></div></div>
+                         </div>
+                         <div class="skill-item" data-progress="80">
+                            <div class="skill-name-level">
+                                 <span class="skill-name">NumPy</span>
+                                 <span class="skill-percentage" style="color: #2c7a7b;">80%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #38b2ac, #2c7a7b);"></div></div>
+                         </div>
+                         <div class="skill-item" data-progress="70">
+                            <div class="skill-name-level">
+                                 <span class="skill-name">Data Structures & Algorithms</span>
+                                 <span class="skill-percentage" style="color: #2b6cb0;">70%</span> </div>
+                             <div class="skill-bar"><div class="skill-progress" style="background: linear-gradient(to right, #3182ce, #2c5282);"></div></div>
+                         </div>
+                    </div>
+
+                    <div class="skill-category md:col-span-2">
+                         <h3 class="category-title">Professional Skills</h3>
+                         <div class="flex flex-wrap gap-2 professional-skills-container">
+                              <span>Problem-solving</span>
+                              <span>Adaptability</span>
+                              <span>Communication</span>
+                              <span>Teamwork</span>
+                              <span>Research</span>
+                              <span>Time Management</span>
+                              <span>Critical Thinking</span>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-design">
+            <h2 class="section-title-design">Education</h2>
+            <div class="education-timeline">
+                <div class="timeline-line"></div> <div class="education-item">
+                    <div class="timeline-dot"></div>
+                    <div class="education-card">
+                        <h3 class="education-degree">Bachelor of Technology (B.Tech)</h3>
+                        <p class="education-field">Computer Science & Engineering (Spec. AI & ML)</p>
+                        <div class="education-details">
+                             <span class="education-detail">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.976 2.343-1.8a11.95 11.95 0 002.97-2.666c.845-1.32.996-2.69.996-3.955a7 7 0 10-14 0c0 1.266.15 2.635.996 3.955.956 1.5 2.01 2.342 2.97 2.666a11.95 11.95 0 002.343 1.8c.311.193.571.337.757.433.091.046.185.09.28.14l.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /></svg>
+                                  Lovely Professional University, Punjab, India
+                             </span>
+                             <span class="education-detail">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" /></svg>
+                                  2022 - 2026 </span>
+                             <span class="education-detail">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M10 1a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 1zM5.05 3.55a.75.75 0 00-1.06 1.06l1.06-1.06zM14.95 4.61a.75.75 0 00-1.06-1.06l1.06 1.06zM3 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 013 10zM17 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0117 10zM7.11 14.95a.75.75 0 10-1.06-1.06l1.06 1.06zM12.89 14.95a.75.75 0 001.06-1.06l-1.06 1.06zM10 17a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0110 17zM10 7a3 3 0 100 6 3 3 0 000-6z" /></svg>
+                                  CGPA: 6.1 / 10.0
+                             </span>
+                         </div>
+                         </div>
+                </div>
+
+                <div class="education-item">
+                     <div class="timeline-dot"></div>
+                    <div class="education-card">
+                        <h3 class="education-degree">Higher Secondary (12th Grade)</h3>
+                        <p class="education-field">Science Stream</p>
+                         <div class="education-details">
+                              <span class="education-detail">
+                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.976 2.343-1.8a11.95 11.95 0 002.97-2.666c.845-1.32.996-2.69.996-3.955a7 7 0 10-14 0c0 1.266.15 2.635.996 3.955.956 1.5 2.01 2.342 2.97 2.666a11.95 11.95 0 002.343 1.8c.311.193.571.337.757.433.091.046.185.09.28.14l.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /></svg>
+                                   Dayanand Anglo Vedic (DAV), Manai, HP
+                              </span>
+                              <span class="education-detail">
+                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" /></svg>
+                                   Completed 2020
+                              </span>
+                              <span class="education-detail">
+                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M10 1a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 1zM5.05 3.55a.75.75 0 00-1.06 1.06l1.06-1.06zM14.95 4.61a.75.75 0 00-1.06-1.06l1.06 1.06zM3 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 013 10zM17 10a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0117 10zM7.11 14.95a.75.75 0 10-1.06-1.06l1.06 1.06zM12.89 14.95a.75.75 0 001.06-1.06l-1.06 1.06zM10 17a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5A.75.75 0 0110 17zM10 7a3 3 0 100 6 3 3 0 000-6z" /></svg>
+                                   Percentage: 89%
+                              </span>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-design">
+            <h2 class="section-title-design">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="space-y-6 contact-info">
+                        <p class="text-gray-700 text-base md:text-lg">
+                            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
+                        </p>
+                        <div class="space-y-4">
+                            <p class="text-gray-700 text-base flex items-center gap-3">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                 <a href="mailto:ranashubu8988@gmail.com" class="text-indigo-600 hover:underline break-all">ranashubu8988@gmail.com</a>
+                            </p>
+                            <p class="text-gray-700 text-base flex items-center gap-3">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                 <a href="https://www.linkedin.com/in/shubham-rana-a31357252/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline break-all">linkedin.com/in/shubham-rana-a31357252</a>
+                            </p>
+                            <p class="text-gray-700 text-base flex items-center gap-3">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                 <a href="https://github.com/Ranashubham19" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline break-all">github.com/Ranashubham19</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-bold mb-1">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-bold mb-1">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-bold mb-1">Message</label>
+                                <textarea id="message" name="message" placeholder="Your Message" required rows="5" class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                            </div>
+                            <button type="submit" class="button-primary">
+                                Send Message
+                            </button>
+                             <p id="form-status" class="text-sm mt-2 text-center h-5"></p> </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-project1" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close-button" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title">Face Detection in Machine Learning</h3>
+            <div class="modal-body">
+                 <p>
+                     This project involved creating a system capable of detecting human faces in images or video streams in real-time.
+                 </p>
+                 <p>
+                     <strong>Key Technologies Used:</strong>
+                     Python, OpenCV (for image loading, preprocessing, and drawing bounding boxes), TensorFlow/Keras (for building and utilizing deep learning models like Haar Cascades, HOG, or more advanced CNN-based detectors like MTCNN or SSD). NumPy was used for efficient array manipulation.
+                 </p>
+                 <p>
+                     <strong>Core Functionality:</strong>
+                     The system processes input images/frames, applies a chosen face detection algorithm (e.g., Haar Cascades for speed, or a deep learning model for higher accuracy), identifies potential face regions, and draws bounding boxes around the detected faces.
+                 </p>
+                  <p>
+                     <strong>Challenges & Learning:</strong>
+                     Challenges included handling variations in lighting, pose, occlusion, and scale. This project provided valuable experience in computer vision fundamentals, deep learning model implementation, and performance optimization techniques for real-time applications.
+                  </p>
+                 </div>
+        </div>
+    </div>
+    <div id="modal-project2" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close-button" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title">Online Examination System</h3>
+            <div class="modal-body">
+                 <p>
+                     This project aimed to build a robust and user-friendly web application for conducting online examinations.
+                 </p>
+                <p>
+                    <strong>Key Technologies Used:</strong>
+                    The system was developed using PHP for server-side logic, MySQL for database management, and HTML, CSS, JavaScript, and Bootstrap for the front-end user interface.
+                </p>
+                <p>
+                    <strong>Core Features:</strong>
+                </p>
+                <ul class="list-disc list-inside mb-4 ml-4 text-gray-600 space-y-1">
+                    <li>Secure user authentication (students and administrators).</li>
+                    <li>Dynamic question fetching from the database.</li>
+                    <li>Support for various question types (e.g., multiple-choice, true/false).</li>
+                    <li>Timed test environment.</li>
+                    <li>Automatic submission and real-time grading upon completion.</li>
+                    <li>Result display and potentially basic analytics for administrators.</li>
+                    <li>User-friendly interface designed for ease of navigation and accessibility.</li>
+                </ul>
+                 <p>
+                    <strong>Challenges & Learning:</strong>
+                    Key challenges involved ensuring security against cheating, managing session state effectively, handling concurrent users, and designing an intuitive UI. This project provided practical experience in full-stack web development, database design, and building secure applications.
+                 </p>
+                 </div>
+        </div>
+    </div>
+
+    <div id="modal-cert1" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close-button" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title" style="color: #6366f1;">Certificate: Algorithms on Strings</h3>
+            <div class="modal-body">
+                 <p class="certificate-detail">
+                      <strong>Course:</strong> Algorithms on Strings
+                 </p>
+                 <p class="certificate-detail">
+                      <strong>Issuing Organization:</strong> University of California San Diego (via Coursera)
+                 </p>
+                  <p class="certificate-detail">
+                      <strong>Date Issued:</strong> Mar 5, 2024
+                 </p>
+                 <p class="certificate-detail">
+                      <strong>Recipient:</strong> Shubham Rana
+                 </p>
+                  <p class="certificate-verify-link">
+                       <a href="https://coursera.org/verify/C2SBMSTG5GQD" target="_blank" rel="noopener noreferrer">Verify Certificate on Coursera</a>
+                  </p>
+            </div>
+        </div>
+    </div>
+    <div id="modal-cert2" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button type="button" class="modal-close-button" aria-label="Close modal">&times;</button>
+            <h3 class="modal-title" style="color: #6366f1;">Certificate: Generative AI with LLMs</h3>
+            <div class="modal-body">
+                 <p class="certificate-detail">
+                      <strong>Course:</strong> Generative AI with Large Language Models
+                 </p>
+                 <p class="certificate-detail">
+                      <strong>Issuing Organization:</strong> DeepLearning.AI & Amazon Web Services (via Coursera)
+                 </p>
+                 <p class="certificate-detail">
+                      <strong>Recipient:</strong> Shubham Rana
+                 </p>
+                  <p class="certificate-verify-link">
+                       <a href="https://coursera.org/verify/EACZZ96RL5RJ" target="_blank" rel="noopener noreferrer">Verify Certificate on Coursera</a>
+                  </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-100 py-6">
+        <div class="container mx-auto px-4 text-center text-gray-600 text-sm">
+            <p>&copy; <span id="current-year"></span> Shubham Rana. All rights reserved.</p>
+             </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuContent = document.getElementById('mobile-menu-content');
+            const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+            const mainHeader = document.getElementById('main-header');
+            const allNavLinks = document.querySelectorAll('.nav-link'); // Combined query for all links
+            const sections = document.querySelectorAll('section[id]'); // Sections with IDs
+            const skillItems = document.querySelectorAll('.skill-item'); // Now targets all skill items again
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+            const modalTriggers = document.querySelectorAll('[data-modal-target]'); // Get all modal triggers
+            const modals = document.querySelectorAll('.modal-overlay'); // Get all modal overlays
+
+            // --- Mobile Menu Toggle ---
+            function toggleMobileMenu() {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            }
+
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+            mobileMenuCloseButton.addEventListener('click', toggleMobileMenu);
+
+            // Close menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Close menu if clicking outside the menu content area (on the overlay)
+            mobileMenu.addEventListener('click', (event) => {
+                if (event.target === mobileMenu) {
+                     toggleMobileMenu();
+                }
+            });
+
+             // --- Sticky Header Shadow & Background ---
+             function handleScrollHeader() {
+                 if (window.scrollY > 30) { // Trigger earlier
+                      mainHeader.classList.add('scrolled');
+                 } else {
+                       mainHeader.classList.remove('scrolled');
+                 }
+             }
+             window.addEventListener('scroll', handleScrollHeader);
+
+
+            // --- Smooth Scrolling & Active Link Highlighting ---
+            let headerHeight = mainHeader.offsetHeight; // Initial height
+             // Recalculate header height on resize (important for accuracy)
+              window.addEventListener('resize', () => {
+                   headerHeight = mainHeader.offsetHeight;
+               });
+
+            // Function to scroll to a section
+            function scrollToSection(targetId) {
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    // Calculate position considering current header height + offset
+                    const elementPosition = targetSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // Extra offset
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+             // Add click listeners to all nav links (desktop and mobile)
+             allNavLinks.forEach(link => {
+                  link.addEventListener('click', (event) => {
+                       const targetId = link.getAttribute('href')?.slice(1);
+                       if (targetId && document.getElementById(targetId)) {
+                            event.preventDefault();
+                            scrollToSection(targetId);
+
+                            // Close mobile menu if open and clicked from mobile
+                            if (!mobileMenu.classList.contains('hidden') && link.classList.contains('mobile-nav-link')) {
+                                 toggleMobileMenu();
+                            }
+                       }
+                   });
+              });
+
+
+            // Function to update active link based on scroll position
+            function updateActiveNavLink() {
+                 let currentSectionId = '';
+                 // Adjust threshold: consider header height + a bit more space
+                 const scrollThreshold = window.pageYOffset + headerHeight + 60;
+
+                 sections.forEach(section => {
+                      const sectionTop = section.offsetTop;
+                      const sectionBottom = sectionTop + section.offsetHeight;
+
+                      // Check if the scroll position is within the section's bounds
+                      if (scrollThreshold >= sectionTop && scrollThreshold < sectionBottom) {
+                           currentSectionId = section.getAttribute('id');
+                      }
+                 });
+
+                 // Special case: If scrolled almost to the bottom, activate the last section
+                 if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 50) {
+                       if (sections.length > 0) {
+                            currentSectionId = sections[sections.length - 1].getAttribute('id');
+                       }
+                 }
+                  // Special case: If scrolled near the top, potentially deactivate all or activate 'about'
+                  else if (window.pageYOffset < sections[0]?.offsetTop - headerHeight - 60) {
+                       currentSectionId = ''; // Or sections[0].getAttribute('id');
+                   }
+
+
+                 allNavLinks.forEach(link => {
+                      link.classList.remove('active');
+                      const linkHref = link.getAttribute('href');
+                      if (linkHref === `#${currentSectionId}`) {
+                           link.classList.add('active');
+                      }
+                 });
+            }
+
+
+            // Debounce scroll event listener for performance
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                  clearTimeout(scrollTimeout);
+                  scrollTimeout = setTimeout(updateActiveNavLink, 50); // Update active link less frequently
+            });
+
+            // Initial check on load
+            updateActiveNavLink();
+
+
+            // --- Animate Skill Bars on Scroll ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px', // Trigger slightly before fully visible
+                threshold: 0.3
+            };
+
+            const skillObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const skillItem = entry.target;
+                        const progressBar = skillItem.querySelector('.skill-progress');
+                        if (progressBar) { // Check if the item has a progress bar
+                            const progress = skillItem.getAttribute('data-progress');
+                            if (progress && progressBar.style.width !== `${progress}%`) {
+                                progressBar.style.width = `${progress}%`;
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe ALL skill items again
+            skillItems.forEach(item => {
+                skillObserver.observe(item);
+            });
+
+             // --- Contact Form Handling (Placeholder) ---
+             if (contactForm) {
+                  contactForm.addEventListener('submit', (e) => {
+                       e.preventDefault();
+                       const nameInput = document.getElementById('name');
+                       const emailInput = document.getElementById('email');
+                       const messageInput = document.getElementById('message');
+                       const submitButton = contactForm.querySelector('button[type="submit"]');
+
+                       formStatus.textContent = ''; // Clear previous status
+                       formStatus.style.color = '';
+
+                       const name = nameInput.value.trim();
+                       const email = emailInput.value.trim();
+                       const message = messageInput.value.trim();
+
+                       let isValid = true;
+                       if (!name) { formStatus.textContent = 'Name is required. '; isValid = false; }
+                       if (!email) { formStatus.textContent += 'Email is required. '; isValid = false; }
+                       else if (!/\S+@\S+\.\S+/.test(email)) { formStatus.textContent += 'Invalid email format. '; isValid = false; }
+                       if (!message) { formStatus.textContent += 'Message is required.'; isValid = false; }
+
+                       if (!isValid) {
+                            formStatus.style.color = '#dc2626'; // Red color for errors
+                            return;
+                       }
+
+                       // Simulate sending
+                       formStatus.textContent = 'Sending...';
+                       formStatus.style.color = '#f59e0b'; // Amber color
+                       submitButton.disabled = true;
+                       submitButton.style.opacity = '0.7';
+
+                       // Replace timeout with actual fetch API call
+                       setTimeout(() => {
+                            // Simulate success
+                            formStatus.textContent = 'Message sent successfully! (Demo)';
+                            formStatus.style.color = '#16a34a'; // Green color
+                            contactForm.reset();
+
+                            // Re-enable button after a short delay
+                            setTimeout(() => {
+                                 submitButton.disabled = false;
+                                 submitButton.style.opacity = '1';
+                                 formStatus.textContent = ''; // Clear status after a while
+                            }, 3000);
+
+                       }, 1500);
+                   });
+             }
+
+             // --- Modal Handling ---
+             function openModal(modal) {
+                  if (modal) {
+                       modal.classList.remove('hidden');
+                       // Use a short delay to allow the element to be rendered before adding the active class for transition
+                       setTimeout(() => {
+                            modal.classList.add('active');
+                            document.body.classList.add('modal-open'); // Prevent background scroll
+                       }, 10);
+                  }
+             }
+
+             function closeModal(modal) {
+                  if (modal) {
+                       modal.classList.remove('active');
+                       // Wait for the transition to finish before hiding
+                       setTimeout(() => {
+                            modal.classList.add('hidden');
+                            // Only remove body class if no other modals are open
+                            if (!document.querySelector('.modal-overlay.active')) {
+                                 document.body.classList.remove('modal-open');
+                            }
+                       }, 300); // Match transition duration
+                  }
+             }
+
+             // Add event listeners to trigger buttons
+             modalTriggers.forEach(button => {
+                  button.addEventListener('click', () => {
+                       const targetSelector = button.getAttribute('data-modal-target');
+                       const modal = document.querySelector(targetSelector);
+                       openModal(modal);
+                   });
+              });
+
+             // Add event listeners to close buttons and overlays
+             modals.forEach(modal => {
+                  // Close button inside modal
+                  const closeButton = modal.querySelector('.modal-close-button');
+                  if (closeButton) {
+                       closeButton.addEventListener('click', () => {
+                            closeModal(modal);
+                       });
+                  }
+                  // Clicking on the overlay (background)
+                  modal.addEventListener('click', (event) => {
+                       if (event.target === modal) { // Check if the click is directly on the overlay
+                            closeModal(modal);
+                       }
+                   });
+              });
+
+             // Close modal with Escape key
+             document.addEventListener('keydown', (event) => {
+                  if (event.key === 'Escape') {
+                       const activeModal = document.querySelector('.modal-overlay.active');
+                       if (activeModal) {
+                            closeModal(activeModal);
+                       }
+                  }
+              });
+
+
+            // --- Set Current Year in Footer ---
+            const currentYearSpan = document.getElementById('current-year');
+             if(currentYearSpan) {
+                  currentYearSpan.textContent = new Date().getFullYear();
+             }
+
+        });
+    </script>
+</body>
+</html>
